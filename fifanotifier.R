@@ -1,7 +1,9 @@
 install.packages("jsonlite")
 install.packages("devtools")
 install.packages("later")
+install.packages("imager")
 library(later)
+library(imager)
 library(jsonlite)
 library(devtools)
 devtools::install_version("notifier")
@@ -53,10 +55,13 @@ checkScore <- function(prevScore = NULL){
   return (newScore)
 }
 
-download.file("https://api.fifa.com/api/v1/picture/tournaments-sq-4/254645_w", 
-              "logo.png")
+# not working 
+#download.file("https://api.fifa.com/api/v1/picture/tournaments-sq-4/254645_w", 
+ #             "logo.png")
+#download the image from the link and save it in the same folder as the R file
+load.image("fifa.png")
 sendNotification <- function(title="", message){
-  notifier::notify(title = title, msg = message, image = normalizePath("logo.png"))
+  notifier::notify(title = title, msg = message, image = normalizePath("fifa.png"))
 }
 
 getUpdates <- function(){
