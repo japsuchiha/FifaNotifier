@@ -5,6 +5,16 @@ library(later)
 library(jsonlite)
 library(devtools)
 devtools::install_version("notifier")
+
+if (!require("notifier", character.only = TRUE)) {
+  url <- "https://cloud.r-project.org/src/contrib/Archive/notifier/notifier_1.0.0.tar.gz"
+  install.packages(url, type = "source", repos = NULL)
+}
+if (!require("later", character.only = TRUE)) {
+  install.packages("later")
+}
+download.file("https://api.fifa.com/api/v1/picture/tournaments-sq-4/254645_w", "logo.png")
+
 liveMatchScore <- function(){
   apiResults <- fromJSON("https://api.fifa.com/api/v1/live/football/")$Results
   matchID <- which(apiResults$IdSeason == 254645 & apiResults$MatchStatus == 3)
